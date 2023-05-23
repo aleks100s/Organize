@@ -25,4 +25,5 @@ class AboutViewModel: BaseViewModel() {
     }
 
     val items: List<RowItem> = makeRowItems(platform)
+    override val title: String = "About Device"
 }

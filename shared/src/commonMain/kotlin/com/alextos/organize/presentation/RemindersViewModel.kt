@@ -27,4 +27,6 @@ class RemindersViewModel: BaseViewModel() {
         repository.markReminder(id, isCompleted)
         onRemindersUpdated?.invoke(reminders)
     }
+
+    override val title: String = "Reminders"
 }

@@ -27,17 +27,18 @@ fun AboutView(
     onUpButtonClick: () -> Unit
 ) {
     Column {
-        Toolbar(onUpButtonClick = onUpButtonClick)
+        Toolbar(title = viewModel.title, onUpButtonClick = onUpButtonClick)
         ContentView(items = viewModel.items)
     }
 }
 
 @Composable
 private fun Toolbar(
+    title: String,
     onUpButtonClick: () -> Unit,
 ) {
     TopAppBar(
-        title = { Text(text = "About Device") },
+        title = { Text(text = title) },
         navigationIcon = {
             IconButton(onClick = onUpButtonClick) {
                 Icon(
