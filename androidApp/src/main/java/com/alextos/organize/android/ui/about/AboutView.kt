@@ -19,17 +19,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.alextos.organize.Platform
-import java.lang.Integer.max
-import kotlin.math.min
+import com.alextos.organize.presentation.AboutViewModel
 
 @Composable
 fun AboutView(
+    viewModel: AboutViewModel = AboutViewModel(),
     onUpButtonClick: () -> Unit
 ) {
     Column {
         Toolbar(onUpButtonClick = onUpButtonClick)
-        ContentView()
+        ContentView(items = viewModel.items)
     }
 }
 
@@ -51,12 +50,10 @@ private fun Toolbar(
 }
 
 @Composable
-private fun ContentView() {
-    val items = makeItems()
-
+private fun ContentView(items: List<AboutViewModel.RowItem>) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(items) { row ->
-            RowView(title = row.first, subtitle = row.second)
+            RowView(title = row.title, subtitle = row.subtitle)
         }
     }
 }
@@ -80,21 +77,6 @@ private fun RowView(
         }
         Divider()
     }
-}
-
-private fun makeItems(): List<Pair<String, String>> {
-    val platform = Platform()
-    val items = mutableListOf(
-        "Operating System" to "${platform.osName} ${platform.osVersion}",
-        "Device" to platform.deviceModel,
-        "CPU" to platform.cpuType
-    )
-    platform.screen?.let {
-        val max = max(it.width, it.height)
-        val min = min(it.width, it.height)
-        items.add("Display" to "${max}x${min} @${it.density}x")
-    }
-    return items
 }
 
 @Preview(showBackground = true)
