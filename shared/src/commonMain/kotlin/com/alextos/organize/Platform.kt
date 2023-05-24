@@ -17,6 +17,7 @@ val Platform.deviceInfo: String
         result.append("$cpuType)")
         return result.toString()
     }
+
 fun Platform.logSystemInfo() {
     Logger.log(deviceInfo, "Platform", LogLevel.DEBUG)
 }

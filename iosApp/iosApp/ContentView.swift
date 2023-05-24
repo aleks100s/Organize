@@ -15,6 +15,7 @@ struct ContentView: View {
 							Label("About", systemImage: "info.circle")
 								.labelStyle(.titleAndIcon)
 						}
+						.accessibilityIdentifier("aboutButton")
 						.padding(8)
 						.popover(isPresented: $shouldOpenAbout) {
 							AboutView()
