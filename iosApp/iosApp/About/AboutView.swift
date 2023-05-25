@@ -10,7 +10,7 @@ import SwiftUI
 import shared
 
 struct AboutView: View {
-	@StateObject private var viewModel = AboutViewModel()
+	@StateObject private var viewModel: AboutViewModel = Koin.instance.get()
 	@Environment(\.dismiss) private var dismiss
 	
 	var body: some View {

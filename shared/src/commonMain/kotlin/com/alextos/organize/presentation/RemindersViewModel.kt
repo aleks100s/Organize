@@ -3,9 +3,9 @@ package com.alextos.organize.presentation
 import com.alextos.organize.data.RemindersRepository
 import com.alextos.organize.domain.Reminder
 
-class RemindersViewModel: BaseViewModel() {
-    private val repository = RemindersRepository()
-
+class RemindersViewModel(
+    private val repository: RemindersRepository
+): BaseViewModel() {
     internal val reminders: List<Reminder>
         get() = repository.reminders
 

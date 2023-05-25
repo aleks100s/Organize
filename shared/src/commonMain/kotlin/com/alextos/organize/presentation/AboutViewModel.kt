@@ -4,13 +4,11 @@ import com.alextos.organize.Platform
 import kotlin.math.max
 import kotlin.math.min
 
-class AboutViewModel: BaseViewModel() {
+class AboutViewModel(platform: Platform): BaseViewModel() {
     data class RowItem(
         val title: String,
         val subtitle: String
     )
-
-    private val platform = Platform()
 
     private fun makeRowItems(platform: Platform): List<RowItem> {
         val rowItems = mutableListOf(

@@ -10,7 +10,7 @@ import shared
 import Combine
 
 final class RemindersViewModelWrapper: ObservableObject {
-	let viewModel = RemindersViewModel()
+	let viewModel: RemindersViewModel = Koin.instance.get()
 	
 	@Published private(set) var reminders: [Reminder] = []
 	

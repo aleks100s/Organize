@@ -23,12 +23,17 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("io.insert-koin:koin-core:3.3.3")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+                implementation("io.insert-koin:koin-test:3.3.3")
             }
         }
         val androidMain by getting {
