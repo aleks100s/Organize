@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -26,6 +27,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("io.insert-koin:koin-core:3.3.3")
+                implementation("com.russhwolf:multiplatform-settings:1.0.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
             }
         }
         val commonTest by getting {
@@ -39,6 +42,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+                implementation("com.squareup.sqldelight:android-driver:1.5.5")
             }
         }
         val androidUnitTest by getting {
@@ -52,6 +56,9 @@ kotlin {
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
             dependsOn(commonMain)
+            dependencies {
+                implementation("com.squareup.sqldelight:native-driver:1.5.5")
+            }
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
@@ -73,5 +80,12 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 28
+    }
+}
+
+sqldelight {
+    database("OrganizeDb") {
+        packageName = "com.alextos.organize"
+        schemaOutputDirectory = file("src/commonMain/sqldelight/com/alextos/organize/db")
     }
 }

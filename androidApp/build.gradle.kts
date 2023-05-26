@@ -56,6 +56,7 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.7.1")
     implementation("io.insert-koin:koin-android:3.4.0")
     implementation("io.insert-koin:koin-androidx-compose:3.4.4")
+    implementation("com.russhwolf:multiplatform-settings:1.0.0")
 
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")

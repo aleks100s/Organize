@@ -1,10 +1,16 @@
 package com.alextos.organize.presentation
 
+import com.alextos.organize.DateFormatter
 import com.alextos.organize.Platform
+import com.russhwolf.settings.Settings
+import kotlinx.datetime.Clock
 import kotlin.math.max
 import kotlin.math.min
 
-class AboutViewModel(platform: Platform): BaseViewModel() {
+class AboutViewModel(
+    platform: Platform,
+    settings: Settings
+): BaseViewModel() {
     data class RowItem(
         val title: String,
         val subtitle: String
@@ -24,4 +30,19 @@ class AboutViewModel(platform: Platform): BaseViewModel() {
 
     val items: List<RowItem> = makeRowItems(platform)
     override val title: String = "About Device"
+
+    val firstOpening: String
+
+    init {
+        val timestampKey = "first_opening_timestamp"
+        val savedValue = settings.getLongOrNull(timestampKey)
+        firstOpening = if (savedValue == null) {
+            val time = Clock.System.now().epochSeconds - 1
+            settings.putLong(timestampKey, time)
+
+            DateFormatter.formatEpoch(time)
+        } else {
+            DateFormatter.formatEpoch(savedValue)
+        }
+    }
 }
